@@ -1,7 +1,11 @@
 package com.example.project;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView textviewname;
     SharedPreferences preferences;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +30,18 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("name", "Emma");
         editor.apply();
+
+
+        button = findViewById(R.id.save);
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,SecondActivity.class);
+                startActivity(intent);
+                Log.d("!", "onclick detected");
+            }
+        });
+
     }
 
     @Override
@@ -36,4 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 }
