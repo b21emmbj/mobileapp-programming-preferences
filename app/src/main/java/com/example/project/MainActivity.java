@@ -23,14 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         textviewname = findViewById(R.id.name);
-
-        preferences = getSharedPreferences("preferences", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("name", "Emma");
-        editor.apply();
-
 
         button = findViewById(R.id.save);
         button.setOnClickListener(new View.OnClickListener(){
@@ -41,16 +34,15 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("!", "onclick detected");
             }
         });
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
+        preferences = getSharedPreferences("preferences", MODE_PRIVATE);
         String name = preferences.getString("name", "inget namn hittades");
         textviewname.setText(name);
-
 
     }
 

@@ -22,16 +22,16 @@ public class SecondActivity extends AppCompatActivity {
 
         button = findViewById(R.id.logout);
         input = findViewById(R.id.input);
-        input.getText();
 
+        preferences = getSharedPreferences("preferences", MODE_PRIVATE);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SecondActivity.this, MainActivity.class);
-
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("name", input.getText().toString());
+                editor.apply();
                 startActivity(intent);
                 Log.d("!", "log out detected");
             }
