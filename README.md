@@ -9,6 +9,7 @@ I activity_main skapade jag en textview som ska ta emot användarens input och v
 
 
 Koden som visas i figur 1 kommer från filen SecondActivity.java. Den redovisar hur jag har gjort för att användarens input ska sparas när man trycker på knappen.
+Detta gjordes genom att jag skapade en instans av en SharedPreferense objekt och en editor.  
 Figur 1 Kod
 ```
    SharedPreferences preferences;
