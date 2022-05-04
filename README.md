@@ -45,6 +45,8 @@ Figur 2 Kod
 ```
 
 
-
+Denna bild är från andra skärmen (second activity), där användaren kan skriva in önskat ord.
 ![](second.png)
+
+Användarens input visas sen upp när hen har tryckt på knappen och i bilden nedan syns det hur inputen visas upp på första skärmen (main activity).
 ![](main.png)
