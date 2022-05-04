@@ -1,42 +1,50 @@
 
 # Rapport
 
-**Skriv din rapport här!**
+För denna uppgift så behövdes en SecondActivity skapas som ska nås via MainActivity. 
+Jag valde att skapa två knappar. En i varje aktivitet som tar en mellan de två aktiviteterna.
+I filen activity_second.xml skapades en Edittext med ett id som används för att tilldela variabeln 
+preferences värdet av vad användaren skriver in i textfältet. 
+I activity_main skapade jag en textview som ska ta emot användarens input och visa upp den på skärmen.
 
-_Du kan ta bort all text som finns sedan tidigare_.
 
-## Följande grundsyn gäller dugga-svar:
-
-- Ett kortfattat svar är att föredra. Svar som är längre än en sida text (skärmdumpar och programkod exkluderat) är onödigt långt.
-- Svaret skall ha minst en snutt programkod.
-- Svaret skall inkludera en kort övergripande förklarande text som redogör för vad respektive snutt programkod gör eller som svarar på annan teorifråga.
-- Svaret skall ha minst en skärmdump. Skärmdumpar skall illustrera exekvering av relevant programkod. Eventuell text i skärmdumpar måste vara läsbar.
-- I de fall detta efterfrågas, dela upp delar av ditt svar i för- och nackdelar. Dina för- respektive nackdelar skall vara i form av punktlistor med kortare stycken (3-4 meningar).
-
-Programkod ska se ut som exemplet nedan. Koden måste vara korrekt indenterad då den blir lättare att läsa vilket gör det lättare att hitta syntaktiska fel.
-
+Koden som visas i figur 1 kommer från filen SecondActivity.java. Den redovisar hur jag har gjort för att användarens input ska sparas när man trycker på knappen.
+Figur 1 Kod
 ```
-function errorCallback(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            // Geolocation API stöds inte, gör något
-            break;
-        case error.POSITION_UNAVAILABLE:
-            // Misslyckat positionsanrop, gör något
-            break;
-        case error.UNKNOWN_ERROR:
-            // Okänt fel, gör något
-            break;
+   SharedPreferences preferences;
+   ...
+   protected void onCreate(Bundle savedInstanceState) {
+     input = findViewById(R.id.input);
+     preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SecondActivity.this, MainActivity.class);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("name", input.getText().toString());
+                editor.apply();
+                startActivity(intent);
+            }
+        });
+```
+
+
+När man återgår till första skärmen så ska användarens input visas upp i en textview.
+Detta görs genom att i filen MainActivity.java hämta SharedPreferences och lägga in den i en strängvariabel som sen kan skrivas ut i textview. 
+Figur 2 Kod
+```
+   protected void onResume() {
+        super.onResume();
+
+        preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+        String name = preferences.getString("name", "inget namn hittades");
+        textviewname.setText(name);
+
     }
-}
 ```
 
-Bilder läggs i samma mapp som markdown-filen.
 
-![](android.png)
 
-Läs gärna:
-
-- Boulos, M.N.K., Warren, J., Gong, J. & Yue, P. (2010) Web GIS in practice VIII: HTML5 and the canvas element for interactive online mapping. International journal of health geographics 9, 14. Shin, Y. &
-- Wunsche, B.C. (2013) A smartphone-based golf simulation exercise game for supporting arthritis patients. 2013 28th International Conference of Image and Vision Computing New Zealand (IVCNZ), IEEE, pp. 459–464.
-- Wohlin, C., Runeson, P., Höst, M., Ohlsson, M.C., Regnell, B., Wesslén, A. (2012) Experimentation in Software Engineering, Berlin, Heidelberg: Springer Berlin Heidelberg.
+![](second.png)
+![](main.png)
